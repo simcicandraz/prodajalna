@@ -225,8 +225,19 @@ streznik.post('/prijava', function(zahteva, odgovor) {
     } catch (err) {
       napaka2 = true;
     }
-  
-    odgovor.end();
+    var sporocilo;
+    
+    vrniStranke(function(napakaPridobitevStrank, stranke) {
+      vrniRacune(function(napakaPridobitevracuna, racuni) {
+        if (napakaPridobitevStrank || napakaPridobitevracuna || napaka1 || napaka2) {
+          sporocilo = "Prišlo je do napake pri registraciji nove stranke. Prosim preverite vnešene podatke in poskusite znova.";
+        } else {
+          sporocilo = "Stranka je bila uspešno registrirana.";
+        }
+        odgovor.render('prijava', {sporocilo: sporocilo, seznamStrank: stranke, seznamRacunov: racuni});
+      }) 
+    });
+    //odgovor.end();
   });
 })
 
