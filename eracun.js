@@ -270,7 +270,7 @@ streznik.post('/odjava', function(zahteva, odgovor) {
     //zahteva.session.currentUser = null;
     zahteva.session.currentUser = undefined;
     //zahteva.session.destroy();
-    console.log("Odjava uporabnika "+zahteva.session.currentUser);
+    //console.log("Odjava uporabnika "+zahteva.session.currentUser);
     odgovor.redirect('/prijava')
 })
 
